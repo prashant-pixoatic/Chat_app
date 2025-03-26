@@ -1,0 +1,50 @@
+<h2>Group Chat in <%= @group.name%> </h2>
+
+<div id="chat-room" data-receiver-id="<%= @group.id %>" data-user-id="<%= current_user.id %>" data-group-id="<%= @group.id %>">
+  <div id="chat-window">
+    <ul id="messages">
+      <% if @messages.present? %>
+        <% @messages.each do |message| %>
+          <%= render partial: "home/group", locals: { message: message } %>
+        <% end %>
+      <% else %>
+        <p>No messages available.</p>
+      <% end %>
+    </ul>
+  </div>
+
+
+
+  <div id="message-input-area">
+    <input id="message-input" style="border-radius: 6px; padding: 4px; font-size; 12px;" />
+    <button id="send-message-btn" style="border-radius: 6px; padding: 4px; font-size; 12px;">Send</button>
+
+    <div id="voice-message-controls">
+      <button id="start-recording" style="background-color: green; color: white; padding: 4px; margin: 6px 0px; font-weight: bold;">Start Recording</button>
+      <button id="stop-recording" disabled style="background-color: red; color: white; padding: 4px; margin: 6px; font-weight: bold;">Stop Recording</button>
+      <audio id="audio-preview" controls hidden></audio>
+    </div>
+  </div>
+</div>
+
+
+<h2>Add User in Group</h2>
+
+<%= form_with model: @group, url: add_user_group_path(@group), method: :post, local: true do |f| %>
+  <div class="">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, disabled: true %>
+  </div>
+
+  <div class="">
+    <%= f.label :user_id, "Select User" %><br />
+    <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :name), { include_blank: true } %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back %>
+

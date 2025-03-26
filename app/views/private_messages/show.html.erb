@@ -1,0 +1,28 @@
+<h2>Private Chat with <%= @receiver.name %></h2>
+
+<div id="chat-room" data-receiver-id="<%= @receiver.id %>" data-user-id="<%= @user_id %>">
+  <div id="chat-window">
+    <ul id="messages">
+      <% if @messages.present? %>
+        <% @messages.each do |message| %>
+            <%= render partial: "home/message", locals: { message: message } %>
+          <% end %>
+      <% else %>
+        <p>No messages available.</p>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="message-input-area">
+    <input id="message-input" type="text" style="border-radius: 6px; padding: 4px; font-size; 12px;" />
+    <button id="send-message-btn" style="border-radius: 6px; padding: 4px; font-size; 12px;">Send</button>
+
+    <div id="voice-message-controls">
+      <button id="start-recording" style="background-color: green; color: white; padding: 4px; margin: 6px 0px; font-weight: bold;">Start Recording</button>
+      <button id="stop-recording" disabled style="background-color: red; color: white; padding: 4px; margin: 6px; font-weight: bold;">Stop Recording</button>
+      <audio id="audio-preview" controls hidden></audio>
+    </div>
+  </div>
+</div>
+
+<%= link_to "Back", :back %>

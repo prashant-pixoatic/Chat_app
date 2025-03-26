@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+
+  <body style="">
+  <% if user_signed_in? %>
+    <h1 style="color:green; text-align: center; padding-top: 20px;"> Welcome <%= current_user.name %> Small Chat App </h1>
+    <div style="text-align: center; margin-top: 20px; display: flex;">
+    <%= button_to "Log Out",  destroy_user_session_path, method: :delete  %>
+    <%= link_to "Edit Profile", edit_user_registration_path %>
+    <%= link_to "Create New Group", new_group_path %></br>
+    </div>
+    <div style="border: 2px; width: 30%;">
+    <% if @groups.present? %>
+      <h3>Groups</h3>
+      <% @groups.each do |group| %>
+        <%= link_to group.name, group_path(group) %></br>
+      <% end %>
+    <% else %>
+      <p>No Groups available. Please create a Group </p>
+    <% end %>
+  <% else %>
+    <h1 style="color:green"> Welcome to Small Chat App </h1>
+    <%= link_to "Sign In", new_user_session_path %>
+  <% end %>
+  </div>
+  <div>
+    <% if @users.present? %>
+      <h3>Users</h3>
+      <% @users.each do |user| %>
+        <%= link_to user.name, private_message_path(user) %></br>
+      <% end %>
+    <% else %>
+      <p>No Users available. </p>
+    <% end %>
+  </div>
+  </body>
+</html>

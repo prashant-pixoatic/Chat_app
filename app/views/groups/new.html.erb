@@ -1,0 +1,14 @@
+<h2>Create New Group</h2>
+
+<%= form_with model: @group, local: true do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autocomplete: "name" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Group" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back %>

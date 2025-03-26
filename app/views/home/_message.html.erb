@@ -1,0 +1,19 @@
+<div class="message">
+  <% if message.is_a?(PrivateMessage) %>
+    <p><strong><%= message.sender.name %>:</strong> <%= message.content %></p>
+  <% end %>
+
+  <% if message.is_a?(VoiceMessage) %>
+    <p><strong><%= message.sender.name %>:</strong> Voice Message</p>
+    <audio controls>
+      <% if message.audio_file.attached? %>
+        <source src="<%= url_for(message.audio_file) %>" type="audio/mpeg">
+        Your browser does not support the audio element.
+      <% else %>
+        <p>No audio file attached.</p>
+      <% end %>
+    </audio>
+  <% end %>
+
+  <p><%= message.created_at.strftime("%I:%M %p") %></p>
+</div>

@@ -66,7 +66,7 @@ end
 gem "devise", "~> 4.8"
 gem "sprockets-rails", "~> 3.5"
 gem "sassc-rails", "~> 2.1"
-gem "rspec-rails", "~> 7.1"
+gem "rspec-rails", "~> 8.0"
 gem "simplecov", "~> 0.22.0"
 gem "rspec-sonarqube-formatter", "~> 1.6"
 gem "faker", "~> 3.5"
